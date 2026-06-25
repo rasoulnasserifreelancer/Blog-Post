@@ -1,4 +1,18 @@
-const app = require('express'); // create an express application
+const path = require('path'); 
+const express = require('express'); 
+
+const app = express(); // create an express application
+
+
+app.set('view engine', 'ejs'); //setting templating engine
+app.set('views', path.join(__dirname, 'views')); //addressing my templates
+
+
+
+//using middlewares for incoming requests
+app.use(express.urlencode({extended:false}) ); // decoding urlencode HTTP request
+app.use(express.static('public')); //serving static files from public folder
+
 
 // different routes here 
 
