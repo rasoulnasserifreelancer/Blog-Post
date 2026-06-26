@@ -5,3 +5,19 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+
+html {
+    --header-text-color : white;
+    --main-content-text-color : rgb(0, 0, 0);
+    --main-background-color-1 : blue;
+    --main-background-color-2 : grey;
+    --box-shadow-color : rgb(128, 157, 158);
+    --main-font-family : sans-serif;
+    --h2-font-size : 24px;
+    --h1-font-size : 24px;
+    --title-font-size : 22px;
+    --text-font-size : 16px;
+    --nav-font-size : 16px;
+
+}

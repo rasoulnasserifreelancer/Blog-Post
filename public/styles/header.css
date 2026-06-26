@@ -1,20 +1,8 @@
-html {
-    --main-text-color : white;
-    --main-background-color-1 : blue;
-    --main-background-color-2 : grey;
-    --box-shadow-color : rgb(128, 157, 158);
-    --main-font-family : sans-serif;
-    --h2-font-size : 24px;
-    --nav-font-size : 16px;
-
-}
-
-
 header {
     display: flex;
     background: linear-gradient(80deg, var(--main-background-color-1), var(--main-background-color-2));
     padding: 1.5rem 2.5rem;
-    color: var(--main-text-color);
+    color: var(--header-text-color);
     box-shadow: 0px 4px 6px var(--box-shadow-color);
     font-family: var(--main-font-family);
     justify-content: space-between;
