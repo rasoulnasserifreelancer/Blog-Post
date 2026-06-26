@@ -16,7 +16,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "some": "nodemon app.js"
+    "start": "nodemon app.js"
   },
   "dependencies": {
     "ejs": "^6.0.1",

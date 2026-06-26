@@ -1,0 +1,6 @@
+header {
+    display: flex;
+    background: linear-gradient(blue, purple);
+    padding: 1rem 2rem;
+    color: azure;
+}
