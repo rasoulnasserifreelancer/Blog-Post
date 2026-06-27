@@ -3,6 +3,9 @@ const express = require('express');
 
 const app = express(); // create an express application
 
+const {createPool} = require('./database/database')
+
+
 app.get('/', (req, res) => {
     res.render('index')
 })
@@ -20,5 +23,9 @@ app.use('/static',express.static('public')); //serving static files from public 
 
 // different routes here 
 
-
-app.listen(3000); // server is running on port 3000 on dev mode
+try {
+    const pool = createPool();
+    app.listen(3000); // server is running on port 3000 on dev mode
+}catch(e) {
+    console.log(e);
+}
