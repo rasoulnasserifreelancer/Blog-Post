@@ -27,6 +27,11 @@ app.use((error,req,res,next) => {
     }
 })
 
+
+
+
+
+
 //client-side error-handlre middleware
 app.use((req, res) => {
     res.render('404'); // page not found error handlre
