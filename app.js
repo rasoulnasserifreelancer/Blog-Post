@@ -24,6 +24,7 @@ app.use('/posts', postRouter);
 app.use((error,req,res,next) => {
     if (error) {
         console.log(error);
+        res.render("500")
     }
 })
 

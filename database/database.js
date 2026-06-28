@@ -18,16 +18,25 @@ function createPool(){
 async function loadData(sql, values){
     try {
         const [rows, fields] = await pool.execute(sql, values);
-        return [rows,fields]
+        return rows
     }catch(e){
         return e
     }
 }
 
 
+async function savePost(values){
+    const sql = 'INSERT INTO users.posts (title, summary, content, author_id) VALUES(?,?,?,?)';
+    const [result, field] = await pool.execute(sql, values);
+    return result;
+}
+
+
+
 
 
 module.exports = {
     createPool, 
-    loadData
+    loadData,
+    savePost
 }

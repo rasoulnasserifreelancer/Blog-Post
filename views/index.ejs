@@ -5,12 +5,12 @@
     <% if (allPosts.length > 0) { %>
     <ul>
 
-        <% for (const post of posts) { %>
+        <% for (const post of allPosts) { %>
 
         <li>
             <article>
                 <div>
-                    <title><%= post.title %></title>
+                    <h3><%= post.title %></h3>
                     <p>By <%= post.fullName %></p>
                     <p><%= post.summary %></p>
                     <p><%= post.content %></p>
