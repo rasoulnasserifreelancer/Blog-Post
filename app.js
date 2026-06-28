@@ -5,8 +5,10 @@ const app = express(); // create an express application
 
 const {createPool} = require('./database/database');
 const defaultRouter = require('./routes/defaultRoutes');
+const postRouter = require('./routes/postRoutes');
 
 app.use('/', defaultRouter);
+app.use('/posts', postRouter); 
 
 
 app.set('view engine', 'ejs'); //setting templating engine
