@@ -6,7 +6,7 @@ function createPool(){
         {
             user:"root",
             password:"88121",
-            host : "http://localhost:3306",
+            host : "localhost",
             database:"users",
     
         }

@@ -2,27 +2,37 @@
 <main>
     <h1>All Posts</h1>
 
+    <% if (allPosts.length > 0) { %>
     <ul>
+
+        <% for (const post of posts) { %>
+
         <li>
-
-                <article>
-        <div>
-            <title>All Posts</title>
-            <p>By</p>
-            <p></p>
-        </div>
-        <div>
-            <ul>
-                <li><button>Delete Post</button></li>
-                <li><button>Edit Post</button></li>
-                <li><button>View Post</button></li>
-            </ul>
-        </div>
-    </article>
-
+            <article>
+                <div>
+                    <title><%= post.title %></title>
+                    <p>By <%= post.fullName %></p>
+                    <p><%= post.summary %></p>
+                    <p><%= post.content %></p>
+                </div>
+                <div>
+                    <ul>
+                        <li><a href="<%= /posts/delete/post.id %>">Delete Post</a></li>
+                        <li><a href="<%= /posts/edit/post.id %>">Edit Post</a></li>
+                        <li><a href="<%= /posts/view/post.id %>">View Post</a></li>
+                    </ul>
+                </div>
+            </article>
+    
         </li>
+    <% } %>
     </ul>
+  <% } else { %>
+    
+    <p>There is no post yet, maybe create some here : <a href="">create post</a></p>
 
+    <% } %>
+    
 </main>
     
 </body>

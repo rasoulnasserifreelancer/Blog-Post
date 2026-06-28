@@ -18,8 +18,17 @@ app.set('views', path.join(__dirname, 'views')); //addressing my templates
 app.use(express.urlencoded({extended:false}) ); // decoding urlencode HTTP request
 app.use('/static',express.static('public')); //serving static files from public folder and with virtual path prefix named static
 
+// server-side error-handlre middleware
+app.use((error,req,res,next) => {
+    if (error) {
+        console.log(error);
+    }
+})
 
-app.get()
+//client-side error-handlre middleware
+app.use((req, res) => {
+    res.render('404'); // page not found error handlre
+})
 
 
 // different routes here 
