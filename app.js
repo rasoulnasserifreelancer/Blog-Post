@@ -3,12 +3,10 @@ const express = require('express');
 
 const app = express(); // create an express application
 
-const {createPool} = require('./database/database')
+const {createPool} = require('./database/database');
+const defaultRouter = require('./routes/defaultRoutes');
 
-
-app.get('/', (req, res) => {
-    res.render('index')
-})
+app.use('/', defaultRouter);
 
 
 app.set('view engine', 'ejs'); //setting templating engine
@@ -19,6 +17,9 @@ app.set('views', path.join(__dirname, 'views')); //addressing my templates
 //using middlewares for incoming requests
 app.use(express.urlencoded({extended:false}) ); // decoding urlencode HTTP request
 app.use('/static',express.static('public')); //serving static files from public folder and with virtual path prefix named static
+
+
+app.get()
 
 
 // different routes here 
