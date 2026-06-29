@@ -4,26 +4,10 @@
 
     <% if (allPosts.length > 0) { %>
     <ul>
-
         <% for (const post of allPosts) { %>
 
         <li>
-            <article>
-                <div>
-                    <h3><%= post.title %></h3>
-                    <p>By <%= post.fullName %></p>
-                    <p><%= post.summary %></p>
-                    <p><%= post.content %></p>
-                </div>
-                <div>
-                    <ul>
-                        <li><a href="/posts/delete/<%=post.id%>">Delete Post</a></li>
-                        <li><a href="/posts/edit/<%=post.id%>">Edit Post</a></li>
-                        <li><a href="/posts/view/<%=post.id%>">View Post</a></li>
-                    </ul>
-                </div>
-            </article>
-    
+            <%- include('./includes/post', {post}) %>
         </li>
     <% } %>
     </ul>

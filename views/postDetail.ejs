@@ -1,11 +1,15 @@
 <%- include('./includes/header') %>    
-<main>
+<main id="post-content">
     <article>
-        <title><%= thePost.title %></title>
-        <address><a href="mailto:<%=thePost.email%>"><%=thePost.fullName%></a></address>|<time datetime="<%= thePost.creation_date %>"><%= thePost.creation_date?.toLocaleString("fa-IR", {dateStyle:"short"}) %></time>
+        <h3><%= thePost.title %></h3>
+        <div id="time">
+            <address><a href="mailto:<%=thePost.email%>"><%=thePost.fullName%></a></address> <small>|</small> <time datetime="<%= thePost.creation_date %>"><%= thePost.creation_date?.toLocaleString("fa-IR", {dateStyle:"short"}) %></time>
+        </div>
         <hr/>
-        <p><%= thePost.summary %></p>
-        <p><%= thePost.content %></p>
+        <div id="content">
+            <p><%= thePost.summary %></p>
+            <p><%= thePost.content %></p>
+        </div>
     </article>
 </main>
 
