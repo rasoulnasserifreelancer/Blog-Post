@@ -2,6 +2,20 @@ const express = require('express');
 const {loadData, savePost} = require("../database/database");
 const router = express.Router();
 
+router.get('/', async (req, res, next) => {
+  try {
+      const allPosts = await loadData('SELECT p.*, a.full_name AS fullName FROM users.posts p INNER JOIN authors a ON p.author_id=a.id');
+      console.log(allPosts);
+      res.render('index', {allPosts})
+    
+  } catch (error) {
+    next(error)
+  }  
+}, (error, req, res, next) => {
+    if (error) {
+        res.render("500");
+    }
+})
 
 router.get('/view/:id', async (req, res, next) => {
   const thePost = await loadData('SELECT p.*, a.full_name AS fullName FROM users.posts p INNER JOIN authors a ON p.author_id=a.id WHERE p.id = ?', [req.params.id]);
@@ -10,6 +24,22 @@ router.get('/view/:id', async (req, res, next) => {
 })
 
 
+
+router.get('/edit/:id', async(req, res, next) => {
+    try {
+        const [post] = await loadData('SELECT * FROM posts WHERE id=?', [req.body.id]); 
+        if (!post) return res.render('404');
+        res.render('edit-post', {post})
+    } catch (error) {
+        if (error) next(error)        
+    }
+    
+}, (e,req,res,next)=>{
+    if (e) {
+        console.log(e);
+        res.render('500');
+    }
+})
 
 router.get('/create', (req, res) => {
     res.render('create-post')

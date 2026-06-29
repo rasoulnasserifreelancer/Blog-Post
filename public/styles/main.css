@@ -44,7 +44,7 @@ main ul article div:last-child ul{
     gap: 0.4rem;
 }
 
-main ul article div:last-child ul a:hover{
+main ul article div:last-child ul a:hover, button:hover{
     padding: 0.5rem;
     background: blue;
     color: white;
