@@ -52,8 +52,24 @@ async function updatePost(values) {
 }
 
 
+
+async function deletePost(values){
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        let sql = 'DELETE FROM posts WHERE id = ?';        
+        let [result] = await connection.execute(sql, values);   
+        return result;     
+    } catch (error) {
+        throw error;        
+    }finally {
+        connection.release();
+    }
+}
+
 module.exports = {
     loadData,
     savePost,
-    updatePost
+    updatePost,
+    deletePost
 }

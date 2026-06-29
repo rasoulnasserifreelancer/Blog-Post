@@ -44,7 +44,6 @@ async function startServer(){
     try {
         const connection = await pool.getConnection();
         app.listen(3000,()=>{
-            console.log('server running');
             connection?.release()
         }); // server is running on port 3000 on dev mode
 

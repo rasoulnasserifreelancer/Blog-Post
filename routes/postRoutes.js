@@ -1,5 +1,5 @@
 const express = require('express');
-const {loadData, savePost, updatePost} = require("../database/database");
+const {loadData, savePost, updatePost, deletePost} = require("../database/database");
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -88,7 +88,19 @@ router.post('/create', async (req, res, next) => {
 
 
 
-
+router.post('/delete', async (req,res, next) => {
+    try {
+        const id = req.body.id;
+        const result = await deletePost([id]);
+        console.log('result', result);
+        res.redirect('/')
+    } catch (error) {
+        console.log(error);
+        next(error);
+    }
+}, (e, req, res, next) => {
+    if (e) res.render('500');
+})
 
 
 

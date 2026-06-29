@@ -6,7 +6,7 @@
                 </div>
                 <div>
                     <ul>
-                        <form method="POST" action="/posts/delete"><button>Delete Post</button></form>
+                        <form method="POST" action="/posts/delete"><input type="hidden" name="id" value="<%= post.id %>"/><button>Delete Post</button></form>
                         <li><a href="/posts/edit/<%=post.id%>">Edit Post</a></li>
                         <li><a href="/posts/view/<%=post.id%>">View Post</a></li>
                     </ul>
