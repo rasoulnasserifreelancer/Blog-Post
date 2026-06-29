@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
   }  
 }, (error, req, res, next) => {
     if (error) {
+        console.log(error);
         res.render("500");
     }
 })

@@ -6,6 +6,7 @@ const app = express(); // create an express application
 const {createPool} = require('./database/database');
 const defaultRouter = require('./routes/defaultRoutes');
 const postRouter = require('./routes/postRoutes');
+const { pool } = require('./database/db');
 
 app.set('view engine', 'ejs'); //setting templating engine
 app.set('views', path.join(__dirname, 'views')); //addressing my templates
@@ -38,11 +39,22 @@ app.use((req, res) => {
 })
 
 
-// different routes here 
 
-try {
-    const pool = createPool();
-    app.listen(3000); // server is running on port 3000 on dev mode
-}catch(e) {
-    console.log(e);
+async function startServer(){
+    try {
+        const connection = await pool.getConnection();
+        app.listen(3000,()=>{
+            console.log('server running');
+            connection?.release()
+        }); // server is running on port 3000 on dev mode
+
+    } catch (error) {
+        console.log('server is down');
+        process.exit(1);        
+    }
 }
+
+startServer();
+
+
+

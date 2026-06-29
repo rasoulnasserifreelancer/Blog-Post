@@ -1,42 +1,59 @@
-const mysql2 = require('mysql2/promise');
-let pool;
+const {pool} = require('./db');
 
-function createPool(){
-    pool = mysql2.createPool(
-        {
-            user:"root",
-            password:"88121",
-            host : "localhost",
-            database:"users",
-    
-        }
-    )
-    return pool;
-}
+
+
+
 
 
 async function loadData(sql, values){
+    let connection;
     try {
-        const [rows, fields] = await pool.execute(sql, values);
+         connection = await pool.getConnection();
+        const [rows, fields] = await connection.execute(sql, values);
         return rows
     }catch(e){
-        return e
+        throw e
+    }finally {
+         connection.release();
     }
 }
 
 
 async function savePost(values){
-    const sql = 'INSERT INTO users.posts (title, summary, content, author_id) VALUES(?,?,?,?)';
-    const [result, field] = await pool.execute(sql, values);
-    return result;
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const sql = 'INSERT INTO users.posts (title, summary, content, author_id) VALUES(?,?,?,?)';
+        const [result, field] = await connection.execute(sql, values);
+        return result;
+    } catch (error) {
+        throw error
+    }finally {
+        connection.release();
+
+    }
 }
 
 
+async function updatePost(values) {
+    let connection;
+    try {
+        connection = await pool.getConnection();
+        const sql = 'UPDATE posts SET title=?, summary=?, content=? WHERE id = ?';
+        const [result, field] =  await connection.execute(sql, values);
+        return result;
+    } catch (error) {
+        throw error;
+    }finally {
+        connection.release();
 
+    }
+
+}
 
 
 module.exports = {
-    createPool, 
     loadData,
-    savePost
+    savePost,
+    updatePost
 }
