@@ -1,5 +1,5 @@
 const express = require('express');
-const {loadData, savePost} = require("../database/database");
+const {loadData, savePost, updatePost} = require("../database/database");
 const router = express.Router();
 
 router.get('/', async (req, res, next) => {
@@ -27,7 +27,7 @@ router.get('/view/:id', async (req, res, next) => {
 
 router.get('/edit/:id', async(req, res, next) => {
     try {
-        const [post] = await loadData('SELECT * FROM posts WHERE id=?', [req.body.id]); 
+        const [post] = await loadData('SELECT * FROM posts WHERE id=?', [req.params.id]); 
         if (!post) return res.render('404');
         res.render('edit-post', {post})
     } catch (error) {
@@ -40,6 +40,27 @@ router.get('/edit/:id', async(req, res, next) => {
         res.render('500');
     }
 })
+
+
+router.post('/edit/:id', async(req, res, next) => {
+    let values = [];
+    values = values.concat(Object.values(req.body)).concat(+req.params.id); 
+    console.log('values', values);
+    try {
+    const result = await updatePost(values);
+    res.redirect('/')
+  } catch (error) {
+    next(error);    
+  }  
+}, (e, req, res, next) => {
+    if (e) {
+        console.log(e, "here");
+        res.render('500');
+    }
+})
+
+
+
 
 router.get('/create', (req, res) => {
     res.render('create-post')
