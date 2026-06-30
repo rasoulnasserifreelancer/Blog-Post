@@ -1,20 +1,29 @@
-<%- include('./includes/header') %>
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('./includes/head', {title:"create Post"}) %>
+</head>
+<body>
+    
+<header>
+    <%-include('./includes/header') %>
+</header>
     <main>
-        <h1>Add an new post</h1>
-        <form action="/posts/create" method="POST">
-            <div>
+        <h1>Add a new post</h1>
+        <form action="/posts/create" method="POST" id="form">
+            <div class="form-control">
                 <label for="title">Title</label>
                 <input required type="text" name="title" id="title">
             </div>
-            <div>
+            <div class="form-control">
                 <label for="summary">Summary</label>
                 <input required type="text" name="summary" id="summary">
             </div>
-            <div>
-                <label for="content">Post Content</label>
-                <textarea required name="content" id="content"></textarea>
+            <div class="form-control">
+                <label for="the-post-content">Post Content</label>
+                <textarea required name="content" id="the-post-content"></textarea>
             </div>
-            <div>
+            <div class="form-control">
                 <label for="author">Select Author</label>
                 <select name="author_id" id="author">
                     <option value="1">Admin</option>
@@ -22,7 +31,7 @@
                     <option value="3">Guest</option>
                 </select>
             </div>
-            <div>
+            <div class="form-control">
                 <button>Add Post</button>
             </div>
         </form>

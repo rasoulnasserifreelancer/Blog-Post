@@ -1,4 +1,13 @@
-<%- include('./includes/header') %>    
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('./includes/head', {title:"Post Detail"}) %>
+</head>
+<body>
+    
+<header>
+    <%-include('./includes/header') %>
+</header>
 <main id="post-content">
     <article>
         <h3><%= thePost.title %></h3>
