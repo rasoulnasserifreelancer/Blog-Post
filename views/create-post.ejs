@@ -26,9 +26,13 @@
             <div class="form-control">
                 <label for="author">Select Author</label>
                 <select name="author_id" id="author">
-                    <option value="1">Admin</option>
-                    <option value="2">Rasoul Naseri</option>
-                    <option value="3">Guest</option>
+
+                    <% for(const author of authors) { %>
+
+                        <option value="<%= author.id %>"><%= author.full_name %></option>
+
+                        <% } %>
+
                 </select>
             </div>
             <div class="form-control">

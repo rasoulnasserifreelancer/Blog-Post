@@ -63,8 +63,10 @@ router.post('/edit/:id', async(req, res, next) => {
 
 
 
-router.get('/create', (req, res) => {
-    res.render('create-post')
+router.get('/create', async (req, res) => {
+    const sql = 'SELECT * FROM authors';
+    const authors = await loadData(sql);
+    res.render('create-post', {authors})
 })
 
 
