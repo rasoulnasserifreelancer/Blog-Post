@@ -30,7 +30,7 @@ router.get(
 
 router.get("/view/:id", async (req, res, next) => {
   const thePost = await loadData(
-    "SELECT p.*, a.full_name, a.email AS fullName FROM users.posts p INNER JOIN authors a ON p.author_id=a.id WHERE p.id = ?",
+    "SELECT p.*, a.full_name, a.email AS fullName FROM posts p INNER JOIN authors a ON p.author_id=a.id WHERE p.id = ?",
     [req.params.id],
   );
   if (!thePost || thePost.length === 0) return res.status(404).render("404");
