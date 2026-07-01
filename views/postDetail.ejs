@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <%- include('./includes/head', {title:"Post Detail"}) %>
+    <%- include('./includes/head', {title:thePost.title}) %>
 </head>
 <body>
     
@@ -12,12 +12,12 @@
     <article>
         <h3><%= thePost.title %></h3>
         <div id="time">
-            <address><a href="mailto:<%=thePost.email%>"><%=thePost.fullName%></a></address> <small>|</small> <time datetime="<%= thePost.creation_date %>"><%= thePost.creation_date?.toLocaleString("fa-IR", {dateStyle:"short"}) %></time>
+            <address><a href="mailto:<%=thePost.email%>"><%=thePost.fullName%></a></address> <small> |</small> <time datetime="<%= thePost.creation_date %>"><%= thePost.creation_date?.toLocaleDateString("en-us", {weekday:"long", year:"numeric", month:"long", day:"numeric"}) %></time>
         </div>
         <hr/>
-        <div id="content">
+        <div id="post-contents">
             <p><%= thePost.summary %></p>
-            <p><%= thePost.content %></p>
+            <p id="post-content-paragraph"><%= thePost.content %></p>
         </div>
     </article>
 </main>

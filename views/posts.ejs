@@ -12,7 +12,7 @@
 <main>
     <h1>All Posts</h1>
 
-    <% if (allPosts.length > 0) { %>
+    <% if ( allPosts && allPosts.length > 0) { %>
     <ul>
         <% for (const post of allPosts) { %>
 
@@ -23,7 +23,7 @@
     </ul>
   <% } else { %>
     
-    <p>There is no post yet, maybe create some here : <a href="">create post</a></p>
+    <p>There is no post yet, maybe create some here ? <a href="/posts/create">create post</a></p>
 
     <% } %>
     

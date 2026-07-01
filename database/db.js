@@ -1,19 +1,15 @@
-const mysql2 = require('mysql2/promise');
+const mysql2 = require("mysql2/promise");
 let pool;
 try {
-    pool = mysql2.createPool(
-            {
-                user:"root",
-                password:"88121",
-                host : "localhost",
-                database:"users",   
-            }
-        )
-    
+  pool = mysql2.createPool({
+    user: process.env["DB-USER"],
+    password: process.env["DB-PASSWORD"],
+    host: process.env["DB-HOST"],
+    database: process.env["DB-DATABASE"],
+  });
 } catch (error) {
-    console.error("Fatal, bad configuration for pool");
-    process.exit(1);
+  console.error("Fatal, bad configuration for pool");
+  process.exit(1);
 }
 
-
-module.exports = {pool}
+module.exports = { pool };
