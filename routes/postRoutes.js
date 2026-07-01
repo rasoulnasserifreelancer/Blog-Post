@@ -12,7 +12,7 @@ router.get(
   async (req, res, next) => {
     try {
       const allPosts = await loadData(
-        "SELECT p.*, a.full_name AS fullName FROM users.posts p INNER JOIN authors a ON p.author_id=a.id",
+        "SELECT p.*, a.full_name AS fullName FROM posts p INNER JOIN authors a ON p.author_id=a.id",
       );
       console.log(allPosts);
       res.render("posts", { allPosts });

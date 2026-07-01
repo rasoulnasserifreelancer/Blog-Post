@@ -1,4 +1,7 @@
+const fs = require('fs');
 const mysql2 = require("mysql2/promise");
+const dotevn = require('dotenv');
+dotevn.config()
 let pool;
 try {
   pool = mysql2.createPool({
@@ -6,6 +9,10 @@ try {
     password: process.env["DB-PASSWORD"],
     host: process.env["DB-HOST"],
     database: process.env["DB-DATABASE"],
+    ssl:{
+      ca : fs.readFileSync('./isrgrootx1.pem'), // Certificate Authority (CA) for TLS connection 
+      rejectUnauthorized:true
+    }
   });
 } catch (error) {
   console.error("Fatal, bad configuration for pool");

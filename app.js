@@ -48,6 +48,7 @@ async function startServer(){
         }); // server is running on port 3000 on dev mode
 
     } catch (error) {
+        console.log(error);
         console.log('server is down');
         process.exit(1);        
     }
