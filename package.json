@@ -16,7 +16,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "nodemon app.js",
+    "Lint": "eslint app.js"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
@@ -26,5 +27,8 @@
     "mysql2": "^3.22.5",
     "nodemon": "^3.1.14",
     "uuid": "^14.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^10.5.0"
   }
 }
