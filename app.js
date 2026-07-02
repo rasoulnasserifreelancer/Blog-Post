@@ -25,7 +25,7 @@ app.use('/posts', postRouter);
 app.use((error,req,res,next) => {
     if (error) {
         console.log(error);
-        res.render("500")
+        res.status(500).render("500")
     }
 })
 
@@ -35,7 +35,7 @@ app.use((error,req,res,next) => {
 
 //client-side error-handlre middleware
 app.use((req, res) => {
-    res.render('404'); // page not found error handlre
+    res.status(400).render('404'); // page not found error handlre
 })
 
 
