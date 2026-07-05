@@ -1,5 +1,5 @@
 {
-  "name": "blog-post",
+  "name": "Blog Post",
   "version": "1.0.0",
   "description": "blog post app",
   "homepage": "https://github.com/rasoulnasserifreelancer/Blog-Post#readme",
@@ -17,7 +17,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
-    "Lint": "eslint app.js"
+    "Lint": "eslint app.js",
+    "startserver" : "set DEBUG='Blog Post:*' & npm start"
   },
   "dependencies": {
     "dotenv": "^17.4.2",
