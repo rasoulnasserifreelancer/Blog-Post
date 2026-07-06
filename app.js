@@ -1,8 +1,15 @@
 const path = require('path'); 
 const express = require('express'); 
-
+const debug = require('debug');
 const app = express(); // create an express application
+debug('express'); // adding express-logger
+const log = debug('start:server'); // adding start server logger
+const errorLog = debug('error:server'); // adding start server logger
+const dotevn = require('dotenv');
 
+
+
+dotevn.config();
 const {createPool} = require('./database/database');
 const defaultRouter = require('./routes/defaultRoutes');
 const postRouter = require('./routes/postRoutes');
@@ -24,7 +31,7 @@ app.use('/posts', postRouter);
 // server-side error-handlre middleware
 app.use((error,req,res,next) => {
     if (error) {
-        console.log(error);
+        errorLog(error?.message);
         res.status(500).render("500")
     }
 })
@@ -42,8 +49,10 @@ app.use((req, res) => {
 
 async function startServer(){
     try {
+        log("here")
         const connection = await pool.getConnection();
         app.listen(3000,()=>{
+            log('starting the server')
             connection?.release()
         }); // server is running on port 3000 on dev mode
 

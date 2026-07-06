@@ -18,9 +18,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon app.js",
     "Lint": "eslint app.js",
-    "startserver" : "set DEBUG='Blog Post:*' & npm start"
+    "startserver": "set \"DEBUG=express:*,start:*,error:*\" & npm start"
   },
   "dependencies": {
+    "debug": "^4.4.3",
     "dotenv": "^17.4.2",
     "ejs": "^6.0.1",
     "ejs-lint": "^2.0.1",
