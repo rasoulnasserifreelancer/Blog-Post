@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+<%-include('./includes/head', {title:"Server Side Error"}) %>
   </head>
   <body>
-    <h1>server side error</h1>
+    <header>
+      <%- include('./includes/header') %>
+    </header>
+    <main>
+      <h1>Opps! Something Went Wrong On the Server!</h1>
+      <p id="server-error">We will try to fix it as soon as possible!</p>
+    </main>
   </body>
 </html>

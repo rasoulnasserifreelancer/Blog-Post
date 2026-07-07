@@ -46,24 +46,29 @@ app.use((req, res) => {
 })
 
 
+const e = new Error("opps");
 
-async function startServer(){
-    try {
-        log("here")
-        const connection = await pool.getConnection();
-        app.listen(3000,()=>{
-            log('starting the server')
-            connection?.release()
-        }); // server is running on port 3000 on dev mode
 
-    } catch (error) {
-        console.log(error);
-        console.log('server is down');
-        process.exit(1);        
-    }
-}
+// async function startServer(){
+//     try {
+//         log("here")
+//         const connection = await pool.getConnection();
+//         app.listen(3000,()=>{
+//             log('starting the server')
+//             connection?.release()
+//         }); // server is running on port 3000 on dev mode
 
-startServer();
+//     } catch (error) {
+//         errorLog(error.cause);
+//         console.log(error.stack);
+//         errorLog('server is down');
+//         process.exit(1);        
+//     }
+// }
+
+app.listen(3000);
+
+// startServer();
 
 
 
