@@ -4,7 +4,7 @@ const compression = require("compression");
 const crypto = require("crypto");
 
 const debug = require("debug");
-const {setNonce} = require("./utils/csp")
+const { setNonce } = require("./utils/csp");
 const app = express(); // create an express application
 debug("express"); // adding express-logger
 const log = debug("start:server"); // adding start server logger
@@ -33,17 +33,16 @@ app.use("/posts", postRouter);
 app.use((error, req, res, next) => {
   if (error) {
     errorLog(error?.message);
-    console.log(error.stack);
-    res.status(500).send(error.stack);
+    const nonce = setNonce(req, res);
+    res.status(500).render("500", { nonce });
   }
 });
 
 //client-side error-handlre middleware
 app.use((req, res) => {
-  const nonce = setNonce(req,res);  
-  res.status(400).render("404", {nonce}); // page not found error handlre
+  const nonce = setNonce(req, res);
+  res.status(400).render("404", { nonce }); // page not found error handlre
 });
-
 
 // async function startServer(){
 //     try {
