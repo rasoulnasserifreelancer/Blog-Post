@@ -5,6 +5,9 @@ const {
   updatePost,
   deletePost,
 } = require("../database/database");
+
+const {setNonce} = require('../utils/csp');
+
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
@@ -13,7 +16,8 @@ router.get("/", async (req, res, next) => {
       "SELECT p.*, a.full_name AS fullName FROM posts p INNER JOIN authors a ON p.author_id=a.id",
     );
     console.log(allPosts);
-    res.render("posts", { allPosts });
+    const nonce = setNonce(req,res);
+    res.render("posts", { allPosts, nonce });
   } catch (error) {
     next(error);
   }

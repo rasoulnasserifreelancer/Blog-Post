@@ -4,6 +4,7 @@ const compression = require("compression");
 const crypto = require("crypto");
 
 const debug = require("debug");
+const {setNonce} = require("./utils/csp")
 const app = express(); // create an express application
 debug("express"); // adding express-logger
 const log = debug("start:server"); // adding start server logger
@@ -21,15 +22,7 @@ app.set("views", path.join(__dirname, "views")); //addressing my templates
 
 //using middlewares for incoming requests
 app.use(express.urlencoded({ extended: false })); // decoding urlencode HTTP request
-app.use((req, res, next) => {
-    const nonce = crypto.randomUUID();
-    res.locals.nonce = nonce;
-    res.setHeader(
-        "Content-Security-Policy",
-        `default-src 'self'; style-src 'self' nonce-${nonce} ; script-src nonce-${nonce}`,
-    );
-    next();
-});
+
 app.use("/static", express.static("public")); //serving static files from public folder and with virtual path prefix named static
 // app.use(compression());
 // adding route handlers
@@ -40,13 +33,15 @@ app.use("/posts", postRouter);
 app.use((error, req, res, next) => {
   if (error) {
     errorLog(error?.message);
-    res.status(500).render("500");
+    console.log(error.stack);
+    res.status(500).send(error.stack);
   }
 });
 
 //client-side error-handlre middleware
 app.use((req, res) => {
-  res.status(400).render("404"); // page not found error handlre
+  const nonce = setNonce(req,res);  
+  res.status(400).render("404", {nonce}); // page not found error handlre
 });
 
 
