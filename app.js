@@ -3,7 +3,7 @@ const express = require("express");
 const compression = require("compression");
 const debug = require("debug");
 // const { setNonce } = require("./utils/csp");
-const cspMiddleware = require('./middleware/csp');
+const helmetMiddleware = require('./middleware/helmetConfig');
 const app = express(); // create an express application
 debug("express"); // adding express-logger
 const log = debug("start:server"); // adding start server logger
@@ -21,7 +21,7 @@ app.set("views", path.join(__dirname, "views")); //addressing my templates
 
 //using middlewares for incoming requests
 app.use(express.urlencoded({ extended: false })); // decoding urlencode HTTP request
-app.use(cspMiddleware)
+app.use(helmetMiddleware)
 app.use("/static", express.static("public")); //serving static files from public folder and with virtual path prefix named static
 app.use(compression());
 // adding route handlers
