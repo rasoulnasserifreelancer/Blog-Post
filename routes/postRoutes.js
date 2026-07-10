@@ -40,11 +40,13 @@ router.get("/view/:id", async (req, res, next) => {
 
 router.get("/edit/:id", async (req, res, next) => {
   try {
+    const nonce = setNonce(req, res);
+
     const [post] = await loadData("SELECT * FROM posts WHERE id=?", [
       req.params.id,
     ]);
-    if (!post) return res.render("404");
-    res.render("edit-post", { post });
+    if (!post) return res.render("404", { nonce });
+    res.render("edit-post", { post, nonce });
   } catch (error) {
     if (error) next(error);
   }
