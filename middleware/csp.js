@@ -1,5 +1,6 @@
 const express = require("express");
 const crypto = require("crypto");
+const helmet = require('helmet')
 const router = express.Router();
 
 /*
@@ -23,5 +24,13 @@ router.use((req, res, next) => {
   console.log('nonce', nonce, req.path);
   next();
 });
+
+router.use(helmet({
+  directives : {
+    contentSecurityPolicy : {
+      'script-src' : ["'self'", (req, res) => `'nonce-${res.locals.nonce}'` ]
+    }
+  }
+}))
 
 module.exports = router;
