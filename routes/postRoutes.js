@@ -16,8 +16,8 @@ router.get("/", async (req, res, next) => {
       "SELECT p.*, a.full_name AS fullName FROM posts p INNER JOIN authors a ON p.author_id=a.id",
     );
     console.log(allPosts);
-    const nonce = setNonce(req, res);
-    res.render("posts", { allPosts, nonce });
+    // const nonce = setNonce(req, res);
+    res.render("posts", { allPosts});
   } catch (error) {
     next(error);
   }
@@ -25,14 +25,13 @@ router.get("/", async (req, res, next) => {
 
 router.get("/view/:id", async (req, res, next) => {
   try {
-    const nonce = setNonce(req, res);
     const thePost = await loadData(
       "SELECT p.*, a.full_name, a.email AS fullName FROM posts p INNER JOIN authors a ON p.author_id=a.id WHERE p.id = ?",
       [req.params.id],
     );
     if (!thePost || thePost.length === 0)
-      return res.status(404).render("404", { nonce });
-    res.render("postDetail", { thePost: thePost[0], nonce });
+      return res.status(404).render("404");
+    res.render("postDetail", { thePost: thePost[0]});
   } catch (error) {
     next(error);
   }
@@ -40,13 +39,11 @@ router.get("/view/:id", async (req, res, next) => {
 
 router.get("/edit/:id", async (req, res, next) => {
   try {
-    const nonce = setNonce(req, res);
-
     const [post] = await loadData("SELECT * FROM posts WHERE id=?", [
       req.params.id,
     ]);
-    if (!post) return res.render("404", { nonce });
-    res.render("edit-post", { post, nonce });
+    if (!post) return res.render("404");
+    res.render("edit-post", {post});
   } catch (error) {
     if (error) next(error);
   }
@@ -66,11 +63,9 @@ router.post("/edit/:id", async (req, res, next) => {
 
 router.get("/create", async (req, res, next) => {
   try {
-    const nonce = setNonce(req, res);
-
     const sql = "SELECT * FROM authors";
     const authors = await loadData(sql);
-    res.render("create-post", { authors, nonce });
+    res.render("create-post", { authors});
   } catch (error) {
     next(error);
   }
