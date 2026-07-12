@@ -19,6 +19,7 @@ router.get("/", async (req, res, next) => {
     // const nonce = setNonce(req, res);
     res.render("posts", { allPosts});
   } catch (error) {
+    console.log('error', error);
     next(error);
   }
 });

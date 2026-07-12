@@ -1,11 +1,12 @@
 const express = require("express");
-const rateLimit = require("express-rate-limit");
+const {rateLimit} = require("express-rate-limit");
 const router = express.Router();
 
-// configuring ratelimiter to put limit of 15 request per minute
+// configuring ratelimiter to put limit of 10 request per minute
 const limiter = rateLimit({
-  max: 15,
-  windowMS: 1000 * 60,
+  windowMs:1000*60,
+  limit:10,
+  
 });
 
 // applying limiter to all incoming requests to my routes

@@ -4,7 +4,8 @@ const compression = require("compression");
 const debug = require("debug");
 const dotevn = require("dotenv");
 
-const { createPool } = require("./database/database");
+dotevn.config(); // setting .env file to process.env obj
+const { createPool } = require("./database/database"); // creating my pool on app load based on .env file, i use pool in my route handlers
 const helmetMiddleware = require("./middleware/helmetConfig");
 const defaultRouter = require("./routes/defaultRoutes");
 const postRouter = require("./routes/postRoutes");
@@ -17,7 +18,6 @@ const log = debug("start:server"); // adding start server logger
 const errorLog = debug("error:server"); // adding start server logger
 debug("express"); // adding express-logger
 
-dotevn.config(); // setting .env file to process.env obj
 
 app.set("view engine", "ejs"); //setting templating engine
 app.set("views", path.join(__dirname, "views")); //addressing my templates
@@ -26,9 +26,9 @@ app.set("views", path.join(__dirname, "views")); //addressing my templates
 app.use(express.urlencoded({ extended: false })); // decoding urlencode HTTP request
 app.use(helmetMiddleware);
 app.use(limiterMiddlewae);
-app.use("/static", express.static("public")); //serving static files from public folder and with virtual path prefix named static
 app.use(compression());
-// adding route handlers
+app.use("/static", express.static("public")); //serving static files from public folder and with virtual path prefix named static
+// adding route handlers middleware
 app.use("/", defaultRouter);
 app.use("/posts", postRouter);
 
@@ -36,14 +36,13 @@ app.use("/posts", postRouter);
 app.use((error, req, res, next) => {
   if (error) {
     errorLog(error?.message);
-    // const nonce = setNonce(req, res);
+    errorLog(error?.stack);
     res.status(500).render("500");
   }
 });
 
 //client-side error-handlre middleware
 app.use((req, res) => {
-  // const nonce = setNonce(req, res);
   res.status(400).render("404"); // page not found error handlre
 });
 

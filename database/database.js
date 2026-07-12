@@ -3,13 +3,13 @@ const { pool } = require("./db");
 async function loadData(sql, values) {
   let connection;
   try {
-    connection = await pool.getConnection();
+    connection = await pool?.getConnection();
     const [rows, fields] = await connection.execute(sql, values);
     return rows;
   } catch (e) {
     throw e;
   } finally {
-    connection.release();
+    connection?.release();
   }
 }
 

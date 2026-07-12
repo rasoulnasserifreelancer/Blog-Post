@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require("fs");
 const mysql2 = require("mysql2/promise");
 
 let pool;
@@ -8,10 +8,10 @@ try {
     password: process.env["DB-PASSWORD"],
     host: process.env["DB-HOST"],
     database: process.env["DB-DATABASE"],
-    ssl:{
-      ca : fs.readFileSync('./isrgrootx1.pem'), // Certificate Authority (CA) for TLS connection 
-      rejectUnauthorized:true
-    }
+    ssl: {
+      ca: fs.readFileSync("./isrgrootx2.pem"), // Certificate Authority (CA) for TLS connection
+      rejectUnauthorized: true,
+    },
   });
 } catch (error) {
   console.error("Fatal, bad configuration for pool");
