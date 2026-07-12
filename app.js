@@ -2,26 +2,30 @@ const path = require("path");
 const express = require("express");
 const compression = require("compression");
 const debug = require("debug");
-// const { setNonce } = require("./utils/csp");
-const helmetMiddleware = require('./middleware/helmetConfig');
-const app = express(); // create an express application
-debug("express"); // adding express-logger
-const log = debug("start:server"); // adding start server logger
-const errorLog = debug("error:server"); // adding start server logger
 const dotevn = require("dotenv");
-dotevn.config();
 
 const { createPool } = require("./database/database");
+const helmetMiddleware = require("./middleware/helmetConfig");
 const defaultRouter = require("./routes/defaultRoutes");
 const postRouter = require("./routes/postRoutes");
+const limiterMiddlewae = require("./middleware/rateLimit");
 const { pool } = require("./database/db");
+
+const app = express(); // create an express application
+
+const log = debug("start:server"); // adding start server logger
+const errorLog = debug("error:server"); // adding start server logger
+debug("express"); // adding express-logger
+
+dotevn.config(); // setting .env file to process.env obj
 
 app.set("view engine", "ejs"); //setting templating engine
 app.set("views", path.join(__dirname, "views")); //addressing my templates
 
 //using middlewares for incoming requests
 app.use(express.urlencoded({ extended: false })); // decoding urlencode HTTP request
-app.use(helmetMiddleware)
+app.use(helmetMiddleware);
+app.use(limiterMiddlewae);
 app.use("/static", express.static("public")); //serving static files from public folder and with virtual path prefix named static
 app.use(compression());
 // adding route handlers
