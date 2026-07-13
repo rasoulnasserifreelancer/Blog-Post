@@ -25,9 +25,9 @@ app.set("views", path.join(__dirname, "views")); //addressing my templates
 //using middlewares for incoming requests
 app.use(express.urlencoded({ extended: false })); // decoding urlencode HTTP request
 app.use(helmetMiddleware);
-app.use(limiterMiddlewae);
 app.use(compression());
 app.use("/static", express.static("public")); //serving static files from public folder and with virtual path prefix named static
+app.use(limiterMiddlewae); // adding limit middleware to all my routes except for public assets
 // adding route handlers middleware
 app.use("/", defaultRouter);
 app.use("/posts", postRouter);
@@ -37,7 +37,7 @@ app.use((error, req, res, next) => {
   if (error) {
     errorLog(error?.message);
     errorLog(error?.stack);
-    res.status(500).render("500");
+    res.status(500).render("500", {message:error?.message});
   }
 });
 

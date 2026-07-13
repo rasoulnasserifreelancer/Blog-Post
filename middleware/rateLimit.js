@@ -6,7 +6,10 @@ const router = express.Router();
 const limiter = rateLimit({
   windowMs:1000*60,
   limit:10,
-  
+  handler : (req, res) => {
+    console.log(req.path, "path");
+    res.status(429).render('429');
+  }
 });
 
 // applying limiter to all incoming requests to my routes
