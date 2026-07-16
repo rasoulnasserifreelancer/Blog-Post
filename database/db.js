@@ -3,9 +3,16 @@ const mysql2 = require("mysql2/promise");
 
 let pool;
 try {
+  console.log({
+  host: process.env["DB-HOST"],
+  port: process.env["DB-PORT"],
+  user: process.env["DB-USER"],
+  database: process.env["DB-DATABASE"],
+});
   pool = mysql2.createPool({
     user: process.env["DB-USER"],
     password: process.env["DB-PASSWORD"],
+    port : process.env["DB-PORT"],
     host: process.env["DB-HOST"],
     database: process.env["DB-DATABASE"],
     ssl: {
