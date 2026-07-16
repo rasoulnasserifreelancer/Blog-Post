@@ -9,7 +9,7 @@ try {
     host: process.env["DB-HOST"],
     database: process.env["DB-DATABASE"],
     ssl: {
-      ca: fs.readFileSync("./isrgrootx2.pem"), // Certificate Authority (CA) for TLS connection
+      ca: fs.readFileSync("./isrgrootx1.pem"), // Certificate Authority (CA) for TLS connection
       rejectUnauthorized: true,
     },
   });
